@@ -1,0 +1,19 @@
+<%= form_for @profile, url: user_profiles_path do |f| %>
+  <%= f.hidden_field 'user_id', value: params[:user_id] %>
+   
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name, class: 'form-control' %>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name, class: 'form-control' %>
+
+  <%= f.label :birthday %>
+  <%= f.date_field :birthday, class: 'form-control' %>
+
+  <%= f.label :gender %>
+  <%= f.text_field :gender, class: 'form-control' %>
+
+  <%= f.file_field :avatar, accept: 'image/jpeg,image/gif,image/png' %>
+
+  <%= f.submit 'Upload Profile Pic' %>
+<% end %>

@@ -1,0 +1,25 @@
+<h1><%= @user.profile.first_name %> <%= @user.profile.last_name %></h1>
+
+<div class="row">
+  <div class="col col-md-3">
+    <%= image_tag @user.profile.avatar.url if @user.profile.avatar? %>
+
+
+    <%=form_for :profile, url: user_update_avatar_path(params[:id]), method: :patch  do |f| %>
+      <%= f.hidden_field 'id', value: params[:id] %>
+      <%= f.file_field :avatar, id: 'choose_pic' %>
+      <%= f.submit "Update Profile Pic", class: 'btn btn-primary btn-sm' %>
+    <% end %>
+    <div id="profile-info">
+    <ul>
+      <li class="list-item"><strong>Email:</strong> <%= @user.email %></li>
+      <li class="list-item"><strong>Birthday:</strong> <%= @user.profile.birthday %></li>
+      <li class="list-item"><strong>Gender:</strong> <%= @user.profile.gender %></li>   
+    </ul>
+  </div>
+  </div>
+
+  <div class="col-md-9">
+  </div>
+</div>
+

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  root "users#index"
-  devise_for :users
+  root "user#show"
+  devise_for :users, :path => 'accounts'
+  resources :users do 
+    resources :profiles
+    patch '/update_avatar', to: 'profiles#update_avatar'
+  end
 end
