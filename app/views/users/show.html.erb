@@ -4,11 +4,12 @@
   <div class="col col-md-3">
     <%= image_tag @user.profile.avatar.url if @user.profile.avatar? %>
 
-
-    <%=form_for :profile, url: user_update_avatar_path(params[:id]), method: :patch  do |f| %>
-      <%= f.hidden_field 'id', value: params[:id] %>
-      <%= f.file_field :avatar, id: 'choose_pic' %>
-      <%= f.submit "Update Profile Pic", class: 'btn btn-primary btn-sm' %>
+    <% if current_user == @user %>
+      <%=form_for :profile, url: user_update_avatar_path(params[:id]), method: :patch  do |f| %>
+        <%= f.hidden_field 'id', value: params[:id] %>
+        <%= f.file_field :avatar, id: 'choose_pic' %>
+        <%= f.submit "Update Profile Pic", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
+      <% end %>
     <% end %>
     <div id="profile-info">
     <ul>
@@ -18,8 +19,8 @@
     </ul>
   </div>
   </div>
-
   <div class="col-md-9">
+    <%= render 'shared/feed' %>
   </div>
 </div>
 

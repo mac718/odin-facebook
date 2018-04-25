@@ -1,0 +1,19 @@
+<div id="post-form">
+  <%= form_for :post, url: user_posts_path(current_user.id) do |f| %>
+    <%= f.hidden_field 'user_id', value: params[:id] %>
+    <%= f.text_area :content, cols: '40', rows: '5', placeholder: "What's on your mind?" %>
+    <br>
+    <%= f.submit class: 'btn btn-primary btn-sm' %>
+  <% end %>
+</div>
+<div id="posts">
+  <% if current_user.posts %>
+    <ul class="list-group">
+      <% current_user.posts.reverse.each do |post| %>
+        <div class="post">
+          <li class="list-group-item"><%= post.content %></li>
+        </div>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
