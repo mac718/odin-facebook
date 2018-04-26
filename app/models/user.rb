@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_one :profile
   has_many :posts
-  has_many :friendships
+  has_many :friendships, :foreign_key => :acceptor_id
+  has_many :requesters, :through => :friendships
+  has_many :friendships, :foreign_key => :requester_id
+  has_many :acceptors, :through => :friendships
   has_many :friend_requests
 end
