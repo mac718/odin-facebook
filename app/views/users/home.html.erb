@@ -1,5 +1,8 @@
-
 <%= render 'shared/header' %>
 <div id="feed" class="col col-md-3 offset-md-4">
-<%= render 'shared/feed' %>
+  <%= render 'shared/feed' %>
 </div>
+
+<% unless current_user.profile %>
+  <h2><%= link_to 'Set up your profile!', new_user_profile_path(current_user) %></h2>
+<% end %>
