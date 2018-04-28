@@ -6,9 +6,14 @@ class User < ApplicationRecord
 
   has_one :profile
   has_many :posts
-  has_many :friendships, :foreign_key => :acceptor_id
-  has_many :requesters, :through => :friendships
-  has_many :friendships, :foreign_key => :requester_id
-  has_many :acceptors, :through => :friendships
-  has_many :friend_requests
+  has_many :friendships, dependent: :destroy
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :friend_requests, dependent: :destroy
+  has_many :pending_friends, :through => :friend_requests, :source => :friend
+
+  def remove_friend(friend)
+    current_user.friends.destroy(friend)
+  end
 end

@@ -1,0 +1,10 @@
+<br>
+<br>
+<br>
+<% if current_user.pending_friends %>
+  <ul>
+    <% current_user.pending_friends.each do |request| %>
+      <li><%= request.profile.first_name %></li>
+    <% end %>
+  </ul>
+<% end %>

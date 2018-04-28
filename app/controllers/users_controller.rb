@@ -3,13 +3,13 @@ class UsersController < ApplicationController
 
   def home 
   end
-  
+
   def index 
   end
 
   def show
     @post = Post.new
-    @user = current_user
+    @user = User.find(params[:id])
     @posts = @user.posts
   end
 end

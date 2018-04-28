@@ -11,6 +11,7 @@
         <%= f.submit "Update Profile Pic", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
       <% end %>
     <% end %>
+    <p><%= link_to "Add friend", friend_requests_path(friend_id: @user), method: :post %></p>
     <div id="profile-info">
     <ul>
       <li class="list-item"><strong>Email:</strong> <%= @user.email %></li>
