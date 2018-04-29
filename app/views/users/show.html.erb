@@ -11,13 +11,15 @@
         <%= f.submit "Update Profile Pic", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
       <% end %>
     <% end %>
-    <p><%= link_to "Add friend", friend_requests_path(friend_id: @user), method: :post %></p>
+    <% unless @user == current_user %>
+      <p><%= link_to "Add friend", friend_requests_path(friend_id: @user), method: :post %></p>
+    <% end %>
     <div id="profile-info">
     <ul>
       <li class="list-item">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            friends (<%= @user.friends.count + @user.inverse_friends.count %>)
+            friends (<%= @user.friends.count + @user.inverse_friends.count %>) 
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <% (@user.friends + @user.inverse_friends).each do |friend| %>
@@ -37,3 +39,5 @@
   </div>
 </div>
 
+<!--
+-->
