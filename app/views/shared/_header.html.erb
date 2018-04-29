@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <%= link_to 'Odinbook', user_home_path(current_user), class: "navbar-brand" %>
+  <span class="navbar-brand">Odinbook</span>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -17,14 +17,15 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Friend Requests(<%= current_user.pending_friends.count %>)
+          Friend Requests(<%= current_user.inverse_pending_friends.count %>)
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <% current_user.pending_friends.each do |pending_friend| %>
+          <% current_user.inverse_pending_friends.each do |pending_friend| %>
             <a class="dropdown-item" href="#">
-              <%= pending_friend.profile.first_name %> 
-              <%= link_to 'accept', friend_request_path, method: :put %>
-              <%= link_to 'decline', friend_request_path, method: :delete %>
+              <%= pending_friend.profile.first_name %>
+              <% byebug %>
+              <%= link_to 'accept', friend_request_path(FriendRequest.where('user_id = ?', pending_friend)[0].id), method: :put %>
+              <%= link_to 'decline', friend_request_path(FriendRequest.where('user_id = ?', pending_friend)[0].id), method: :delete %>
             </a>
           <% end %>
         </div>

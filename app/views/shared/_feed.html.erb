@@ -7,7 +7,7 @@
   <% end %>
 </div>
 <div id="posts">
-  <% if current_user.posts %>
+  <% if current_user.posts || current_user.friends.posts || current_user.inverse_friends.posts %>
     <ul class="list-group">
       <% current_user.posts.reverse.each do |post| %>
         <div class="post">
