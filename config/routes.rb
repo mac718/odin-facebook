@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, :path => 'accounts'
   resources :users do 
     resources :profiles
-    resources :posts
+    resources :posts do 
+      resources :likes, only: [:create, :destroy], :defaults => { :likeable => 'Post' }
+    end
     patch '/update_avatar', to: 'profiles#update_avatar'
     get '/home', to: 'users#home'
   end
-  resources :friend_requests
+  resources :friend_requests, only: [:create, :destroy, :index, :update]
 end

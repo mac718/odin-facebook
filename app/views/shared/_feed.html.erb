@@ -8,12 +8,17 @@
 </div>
 <div id="posts">
   <% if current_user.posts || current_user.friends.posts || current_user.inverse_friends.posts %>
-    <ul class="list-group">
-      <% (current_user.friends_posts + current_user.posts).reverse.each do |post| %>
-        <div class="post">
-          <li class="list-group-item"><%= post.content %></li>
-        </div>
-      <% end %>
-    </ul>
+    <% (current_user.friends_posts + current_user.posts).reverse.each do |post| %>
+      <div class="post">
+        <p><%= image_tag post.user.profile.avatar.resized.url if post.user.profile.avatar? %><%= post.user.profile.first_name %> <%= post.user.profile.last_name %></p>
+        Posted <%= time_ago_in_words(post.created_at) %> ago.
+        <div class="post-content"><%= post.content %></div>
+        <% unless post.likes.empty? %>
+          <div class="likes"><%= post.likes.first.liker_id %></div>
+        <% else %>
+          <div class="like"><%= link_to 'like', user_post_likes_path(current_user, post.id), method: :post %></div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>

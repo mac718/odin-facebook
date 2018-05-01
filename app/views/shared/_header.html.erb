@@ -23,7 +23,6 @@
           <% current_user.inverse_pending_friends.each do |pending_friend| %>
             <a class="dropdown-item" href="#">
               <%= pending_friend.profile.first_name %>
-              <% byebug %>
               <%= link_to 'accept', friend_request_path(FriendRequest.where('user_id = ?', pending_friend)[0].id), method: :put %>
               <%= link_to 'decline', friend_request_path(FriendRequest.where('user_id = ?', pending_friend)[0].id), method: :delete %>
             </a>
