@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col col-md-3">
-    <%= image_tag @user.profile.avatar.url if @user.profile.avatar? %>
+    <%= image_tag @user.profile.avatar.thumb.url if @user.profile.avatar? %>
 
     <% if current_user == @user %>
       <%=form_for :profile, url: user_update_avatar_path(params[:id]), method: :patch  do |f| %>

@@ -20,19 +20,8 @@ class User < ApplicationRecord
     current_user.friends.destroy(friend)
   end
 
-  def friends_posts
-    friends_posts = []
-    self.friends.each do |friend|
-      friend.posts.each do |post|
-        friends_posts << post
-      end
-    end
-
-    self.inverse_friends.each do |inverse_friend|
-      inverse_friend.posts.each do |post|
-        friends_posts << post
-      end
-    end
-    friends_posts
+  def feed
+    ids = (self.friends.pluck(:id) + self.inverse_friends.pluck(:id)) << self.id
+    posts = Post.where(user_id: ids)
   end
 end

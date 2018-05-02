@@ -7,14 +7,73 @@
   <% end %>
 </div>
 <div id="posts">
-  <% if current_user.posts || current_user.friends.posts || current_user.inverse_friends.posts %>
-    <% (current_user.friends_posts + current_user.posts).reverse.each do |post| %>
+  <% if feed_user.feed %>
+    <% feed_user.feed.reverse.each do |post| %>
       <div class="post">
-        <p><%= image_tag post.user.profile.avatar.resized.url if post.user.profile.avatar? %><%= post.user.profile.first_name %> <%= post.user.profile.last_name %></p>
-        Posted <%= time_ago_in_words(post.created_at) %> ago.
-        <div class="post-content"><%= post.content %></div>
+        <div class="post-header">
+          <%= link_to user_path(post.user) do %>
+            <%= image_tag post.user.profile.avatar.feed.url, class: "feed_avatar" if post.user.profile.avatar? %> <%= post.user.profile.first_name %> <%= post.user.profile.last_name %>
+          <% end %>
+        </div>
+
+        <small><em>Posted <%= time_ago_in_words(post.created_at) %> ago.</em></small>
+        
+        
+        <div class="post-content"><h4><%= post.content %></h4></div>
         <% unless post.likes.empty? %>
-          <div class="likes"><%= post.likes.first.liker_id %></div>
+          <div class="likes">
+            Liked by 
+            <% if post.likes.count == 1 %>
+              <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+                <%= User.find(post.likes.first.liker_id).profile.first_name %> <%= User.find(post.likes.first.liker_id).profile.last_name %>
+              </a>
+            <% elsif post.likes.count == 2 %>
+              <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+                <%= post.post_likers_names.join(' and ') %>
+              </a>
+            <% else %>
+              <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+                <%= post.post_likers_names[0] %>, <%= post.post_likers_names[1] %>,
+              and  <%= pluralize((post.post_likers.count - 2), 'other') %>
+            </a>
+          
+          <!-- Modal -->
+            
+            <div class="modal fade" id="bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="bannerformmodalTitle"><%= pluralize((post.likes.count), 'likes') %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <ul class="list-group">
+                      <% post.post_likers.each do |post_liker| %>
+                        <li class="list-group-item">
+                          <%= link_to user_path(post_liker) do %>
+                            <%= image_tag post_liker.profile.avatar.feed.url %>
+                          <% end %>
+                          <%= link_to "#{post_liker.profile.first_name} #{post_liker.profile.last_name}", user_path(post_liker) %>
+                          <button class="btn btn-sm add-friend-modal">
+                            <%= link_to "Add friend", friend_requests_path(friend_id: post_liker),method: :post %>
+                          </button>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% unless post.post_likers.include?(current_user) %>
+            <div class="like"><%= link_to 'like', user_post_likes_path(current_user, post.id), method: :post %></div>
+          <% end %>
+        </div>
         <% else %>
           <div class="like"><%= link_to 'like', user_post_likes_path(current_user, post.id), method: :post %></div>
         <% end %>
@@ -22,3 +81,5 @@
     <% end %>
   <% end %>
 </div>
+
+<!--current_user.friends_posts + current_user.posts-->
