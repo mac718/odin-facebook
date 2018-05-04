@@ -8,4 +8,8 @@ module ApplicationHelper
       current_user
     end
   end
+
+  def friends(user)
+    user.friends + user.inverse_friends
+  end
 end

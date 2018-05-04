@@ -18,11 +18,11 @@
     <ul>
       <li class="list-item">
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            friends (<%= @user.friends.count + @user.inverse_friends.count %>)  
+          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            friends (<%= friends(@user).count %>)  
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <% (@user.friends + @user.inverse_friends).each do |friend| %>
+            <% (friends(@user)).each do |friend| %>
               <%= link_to "#{friend.profile.first_name} #{friend.profile.last_name}", user_path(friend), class: 'dropdown-item' %>
             <% end %>
           </div>
