@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     resources :profiles
     resources :posts do 
       resources :likes, only: [:create, :destroy], :defaults => { :likeable => 'Post' }
-      resources :comments
+      resources :comments, :defaults => { :commentable => 'Post' } do 
+        resources :likes, only: [:create, :destroy], :defaults => { :likeable => 'Comment' }
+      end
     end
     patch '/update_avatar', to: 'profiles#update_avatar'
     get '/home', to: 'users#home'

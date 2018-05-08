@@ -1,0 +1,68 @@
+<div class="likes">
+<% unless locals[:object].likes.empty? %>
+
+    <% if locals[:object].likes.count == 1 && locals[:object].class == Post%>
+    Liked by 
+      <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+        <%= User.find(locals[:object].likes.first.liker_id).profile.first_name %> <%= User.find(locals[:object].likes.first.liker_id).profile.last_name %>
+      </a>
+    <% elsif locals[:object].likes.count == 2 && locals[:object].class == Post %>
+    Liked by 
+      <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+        <%= locals[:likers_names].join(' and ') %>
+      </a>
+    <% elsif locals[:object].likes.count > 2 && locals[:object].class == Post %>
+    Liked by
+      <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+        <%= locals[:likers_names][0] %>, <%= locals[:likers_names][1] %>,
+        and <%= pluralize((locals[:likers].count - 2), 'other') %>
+      </a>
+    <% elsif locals[:object].class == Comment && locals[:object].likes.count > 0 %>
+    <%byebug%>
+      <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+        <span class="badge badge-pill badge-primary"><%= locals[:object].likes.count %></span><%= fa_icon "thumbs-up", class: 'comment-like-button' %>
+      </a>
+    <% end %>
+
+  
+  <!-- Modal -->
+    
+    <div class="modal fade" id="bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="bannerformmodalTitle"><%= pluralize((locals[:object].likes.count), 'likes') %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              <% locals[:likers].each do |liker| %>
+              <%byebug%>
+                <li class="list-group-item">
+                  <%= link_to user_path(liker) do %>
+                    <%= image_tag liker.profile.avatar.feed.url %>
+                  <% end %>
+                  <%= link_to "#{liker.profile.first_name} #{liker.profile.last_name}", user_path(liker) %>
+                  <button class="btn btn-sm add-friend-modal">
+                    <%= link_to "Add friend", friend_requests_path(friend_id: liker),method: :post %>
+                  </button>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+<% else %>
+  <% unless locals[:likers].include?(current_user) && locals[:object].class == Post %>
+    <%= link_to 'like', locals[:path], method: :post %>
+  <% end %>
+<% end %>
+</div>

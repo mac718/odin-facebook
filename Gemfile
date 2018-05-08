@@ -56,3 +56,4 @@ gem 'bootstrap', '~> 4.1.0'
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem "font-awesome-rails"

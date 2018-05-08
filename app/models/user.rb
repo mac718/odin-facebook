@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :inverse_friend_requests, class_name: 'FriendRequest', foreign_key: 'friend_id'
   has_many :inverse_pending_friends, :through => :inverse_friend_requests, :source => 'user'
   has_many :likes, foreign_key: 'liker_id'
+  has_many :comments, :as => :commentable, :foreign_key => 'user_id'
 
   def remove_friend(friend)
     current_user.friends.destroy(friend)
