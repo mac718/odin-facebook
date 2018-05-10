@@ -1,5 +1,5 @@
 <div class="likes">
-<% unless locals[:object].likes.empty? %>
+<% if locals[:object].likes.any? %>
 
     <% if locals[:object].likes.count == 1 && locals[:object].class == Post%>
     Liked by 
@@ -59,7 +59,8 @@
     </div>
 
 <% else %>
-  <% unless locals[:likers].include?(current_user) && locals[:object].class == Post %>
+  <% unless locals[:object].class == Comment %>
+  <%byebug%>
     <%= link_to 'like', locals[:path], method: :post %>
   <% end %>
 <% end %>
