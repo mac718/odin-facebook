@@ -1,18 +1,7 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class PhotoUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  version :feed do 
-    process resize_to_limit: [75, 75]
-  end
-
-  version :thumb do
-    process resize_to_limit: [200,200]
-  end
-
-  version :photo_gallery do 
-    process resize_to_limit: [75, 75]
-  end
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?

@@ -18,7 +18,6 @@
         and <%= pluralize((locals[:likers].count - 2), 'other') %>
       </a>
     <% elsif locals[:object].class == Comment && locals[:object].likes.count > 0 %>
-    <%byebug%>
       <a href="#" data-toggle="modal" data-target="#bannerformmodal">
         <span class="badge badge-pill badge-primary"><%= locals[:object].likes.count %></span><%= fa_icon "thumbs-up", class: 'comment-like-button' %>
       </a>
@@ -39,7 +38,6 @@
           <div class="modal-body">
             <ul class="list-group">
               <% locals[:likers].each do |liker| %>
-              <%byebug%>
                 <li class="list-group-item">
                   <%= link_to user_path(liker) do %>
                     <%= image_tag liker.profile.avatar.feed.url %>
