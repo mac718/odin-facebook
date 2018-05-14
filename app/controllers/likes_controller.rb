@@ -11,5 +11,8 @@ class LikesController < ApplicationController
   end
 
   def destroy
+    @like = current_user.likes.where('likeable_id = ? AND likeable_type = ?', params["#{params[:likeable].downcase}_id"], params[:likeable])[0]
+    Like.destroy(@like.id)
+    redirect_back fallback_location: current_user
   end
 end

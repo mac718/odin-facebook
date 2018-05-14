@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :likes, foreign_key: 'liker_id'
   has_many :comments, :as => :commentable, :foreign_key => 'user_id'
 
+  
+
   def remove_friend(friend)
     current_user.friends.destroy(friend)
   end

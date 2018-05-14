@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :path => 'accounts'
   resources :users do 
     resources :profiles
+    resources :photos, :defaults => { :likeable => 'Photo' }
     resources :posts do 
       resources :likes, only: [:create, :destroy], :defaults => { :likeable => 'Post' }
       resources :comments, :defaults => { :commentable => 'Post' } do 
