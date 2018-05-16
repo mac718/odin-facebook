@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
-  force_ssl
-  protect_from_forgery with: :exception
-
+  protect_from_forgery with: :exception, prepend: true
+  #protect_from_forgery prepend: true
+  #protect_from_forgery prepend: true
+  #protect_from_forgery prepend: true, with: :exception
+  #skip_before_action :verify_authenticity_token, if: -> { controller_name == 'sessions' }
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
