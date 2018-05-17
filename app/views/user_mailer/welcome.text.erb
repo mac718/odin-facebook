@@ -1,0 +1,7 @@
+Hi, <%= @user.email%>!
+Welcome to Odinbook! If you haven't done so already, take a minute to set up your profile at: 
+  <% if @user.profile %>
+    http://localhost:3000/users/<%= @user.id %>
+  <% else %>
+     http://localhost:3000/users/<%= @user.id %>/profiles/new.
+  <% end %>
