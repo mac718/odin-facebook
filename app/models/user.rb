@@ -27,4 +27,15 @@ class User < ApplicationRecord
     ids = (self.friends.pluck(:id) + self.inverse_friends.pluck(:id)) << self.id
     posts = Post.where(user_id: ids)
   end
+
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
+  end
 end

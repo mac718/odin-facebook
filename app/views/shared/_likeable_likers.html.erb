@@ -2,7 +2,6 @@
   <% if locals[:object].likes.any? %>
 
       <% if !locals[:likers].include?(current_user) #&& locals[:object].class != Comment %>
-      <%byebug%>
         <%= link_to 'like', locals[:like_path], method: :post %>
       <% else %>
 
