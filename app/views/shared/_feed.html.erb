@@ -23,7 +23,7 @@
 
         <hr>
        
-        <%= render 'shared/likeable_likers', locals: {object: post, likers_names: post.post_likers_names, likers: post.post_likers, like_path: user_post_likes_path(current_user, post.id), unlike_path: user_post_like_path(current_user, post.id)} %>
+        <%= render 'shared/likeable_likers', locals: {object: post, likers_names: post.post_likers_names, likers: post.post_likers, like_path: user_post_likes_path(current_user, post.id)} %>
         <hr>
 
         <% unless post.comments.empty? %>
@@ -36,7 +36,7 @@
               <%= comment.content %>
             </div>
             <div class="comment-likes-timestamp">
-              <%= render 'shared/likeable_likers', locals: {object: comment, likers_names: comment.comment_likers_names, likers: comment.comment_likers, like_path: user_post_comment_likes_path(current_user, post.id, comment.id), unlike_path: user_post_comment_like_path(current_user, post.id, comment.id)} %>
+              <%= render 'shared/likeable_likers', locals: {object: comment, likers_names: comment.comment_likers_names, likers: comment.comment_likers, like_path: user_post_comment_likes_path(current_user, post.id, comment.id)} %>
               
               <small><em><%= time_ago_in_words(comment.created_at) %> ago.</em></small>
             </div>
