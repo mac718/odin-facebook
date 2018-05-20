@@ -60,4 +60,5 @@ gem 'mini_magick'
 gem "font-awesome-rails"
 gem 'omniauth-facebook'
 gem 'figaro'
+gem 'sendgrid-ruby'
 #gem 'thin'
