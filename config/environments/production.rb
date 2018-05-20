@@ -86,12 +86,14 @@ Rails.application.configure do
 
   #config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
+  config.action_mailer.default_url_options = { :host => 'odinbook.com' }
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   ActionMailer::Base.smtp_settings = {
     :user_name => ENV['SENDGRID_USERNAME'],
     :password => ENV['SENDGRID_PASSWORD'],
-    :domain => 'odinfbook.com',
+    :domain => 'odinbook.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,
