@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   root "users#home"
   devise_for :users, :path => 'accounts', :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", 
   :registrations => "users/registrations" }
-  devise_scope :user do
-    delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-  end
   resources :users do 
     resources :profiles
     resources :photos, :defaults => { :likeable => 'Photo' }
