@@ -51,6 +51,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :production do 
+  gem "fog-aws"
+  gem 'sendgrid-ruby'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.1.0'
@@ -60,5 +65,4 @@ gem 'mini_magick'
 gem "font-awesome-rails"
 gem 'omniauth-facebook'
 gem 'figaro'
-gem 'sendgrid-ruby'
 #gem 'thin'
