@@ -52,7 +52,7 @@ group :development do
 end
 
 group :production do 
-  gem "fog-aws"
+  gem "fog-aws", require: 'fog/aws'
   gem 'sendgrid-ruby'
 end
 
