@@ -1,6 +1,6 @@
 <h1>Odinbook</h1>
 
-<p>Hi, <%= @user.email%>!</p>
+<p>Hi, <%= @user.email %>!</p>
 <p>Welcome to Odinbook! If you haven't done so already, take a minute to set up your 
   <% if @user.profile %>
     <%= link_to 'profile.', user_url(@user) %>
