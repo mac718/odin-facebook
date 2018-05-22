@@ -1,0 +1,13 @@
+<li class="list-group-item">
+  <%= link_to user_path(user) do %>
+    <%= image_tag user.profile.avatar.feed.url if user.profile.avatar %>
+  <% end %>
+  <%= link_to "#{user.profile.first_name} #{user.profile.last_name}", user_path(user) %>
+  <% if current_user.all_friends.include?(user) %>
+    <button class="btn btn-secondary index-button"><%= fa_icon "check" %> Friends</button>
+  <% else %>
+    <%= link_to friend_requests_path(friend_id: user), method: :post do %>
+      <button class="btn btn-primary index-button">Add Friend</button>
+    <% end %>
+  <% end %>
+</li>

@@ -15,8 +15,8 @@
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
       <%= yield %>
-      <p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+      <%= content_tag(:div, notice, class: "alert alert-success") if notice %>
+      <%= content_tag(:div, alert, class: "alert alert-warning") if alert %>
     </div>
   </body>
 </html>

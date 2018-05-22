@@ -18,9 +18,12 @@ class User < ApplicationRecord
   has_many :comments, :as => :commentable, :foreign_key => 'user_id'
 
   
+  def all_friends
+    self.friends + self.inverse_friends
+  end
 
   def remove_friend(friend)
-    current_user.friends.destroy(friend)
+    current_user.all_friends.destroy(friend)
   end
 
   def feed

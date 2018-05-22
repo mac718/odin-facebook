@@ -12,7 +12,7 @@ class FriendRequestsController < ApplicationController
 
     if @friend_request.save
       #render :show, status: :created, location: @friend_request
-      redirect_to :back
+      redirect_back fallback_location: 'users/home'
     else
       render json: @friend_request.errors, status: :unprocessable_entity
     end
@@ -20,6 +20,7 @@ class FriendRequestsController < ApplicationController
 
   def update 
     @friend_request.accept
+    redirect_back fallback_location: 'users/home'
   end
 
   def destroy
