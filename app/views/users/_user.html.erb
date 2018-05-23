@@ -4,7 +4,11 @@
   <% end %>
   <%= link_to "#{user.profile.first_name} #{user.profile.last_name}", user_path(user) %>
   <% if current_user.all_friends.include?(user) %>
+    <%= link_to friend_path(user.id), method: :delete do %>
+      <button class="btn btn-secondary index-button">Unfriend</button>
+    <% end %>
     <button class="btn btn-secondary index-button"><%= fa_icon "check" %> Friends</button>
+    
   <% else %>
     <%= link_to friend_requests_path(friend_id: user), method: :post do %>
       <button class="btn btn-primary index-button">Add Friend</button>

@@ -23,7 +23,11 @@ class User < ApplicationRecord
   end
 
   def remove_friend(friend)
-    current_user.all_friends.destroy(friend)
+    if self.friends.include?(friend)
+      self.friends.destroy(friend)
+    elsif self.inverse_friends.include?(friend)
+      self.inverse_friends.destroy(friend)
+    end
   end
 
   def feed

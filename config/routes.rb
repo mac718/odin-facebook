@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     get '/home', to: 'users#home'
   end
   resources :friend_requests, only: [:create, :destroy, :index, :update]
+  resources :friends, only: [:index, :destroy]
 end
