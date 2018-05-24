@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20180521224237) do
     t.string   "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json     "photos"
   end
 
   create_table "users", force: :cascade do |t|

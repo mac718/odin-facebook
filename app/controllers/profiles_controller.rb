@@ -15,6 +15,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def edit
+    @profile = Profile.find(params[:id])
+  end
+
+  def update
+    @profile = Profile.find(params[:id])
+    @profile.update(profile_params)
+  end
+
   def update_avatar
     @profile = Profile.find_by(user_id: params[:profile][:id])
     byebug
