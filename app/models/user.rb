@@ -45,11 +45,11 @@ class User < ApplicationRecord
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
-      user
     end
     full_name = auth.info.name.split
     profile = user.build_profile(first_name: full_name[0], last_name: [1], avatar: auth.info.image)
     profile.save
+    user
   end
 
    def self.new_with_session(params, session)
