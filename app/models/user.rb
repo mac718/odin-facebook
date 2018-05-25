@@ -48,7 +48,7 @@ class User < ApplicationRecord
       user
     end
     full_name = auth.info.name.split
-    profile = user.profile.build(first_name: full_name[0], last_name: [1], avatar: auth.info.image)
+    profile = user.build_profile(first_name: full_name[0], last_name: [1], avatar: auth.info.image)
     profile.save
   end
 
