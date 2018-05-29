@@ -24,7 +24,7 @@
         </a>
       <% elsif locals[:object].likes.count > 2 && locals[:object].class == Post %>
         Liked by
-        <a href="#" data-toggle="modal" data-target="#bannerformmodal">
+        <a href="#" data-toggle="modal" data-target="#postLikesModal">
           <%= locals[:likers_names][0] %>, <%= locals[:likers_names][1] %>,
           and <%= pluralize((locals[:likers].count - 2), 'other') %>
         </a>        
@@ -35,10 +35,10 @@
       <% end %>
 
     
-    <!-- Modal -->
+    <!-- Modals -->
 
     <% if locals[:object].class == Post %>
-       <div class="modal fade" id="bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
+       <div class="modal fade" id="postLikesModal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
