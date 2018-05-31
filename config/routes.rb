@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       end
     end
     patch '/update_avatar', to: 'profiles#update_avatar'
+    patch '/update_cover_photo', to: 'profiles#update_cover_photo'
     get '/home', to: 'users#home'
   end
   resources :friend_requests, only: [:create, :destroy, :index, :update]
