@@ -2,6 +2,9 @@ class CoverPhotoUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
+  version :thumb do
+    process resize_to_fill: [1000,350]
+  end
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
@@ -44,7 +47,7 @@ class CoverPhotoUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
+  # def filenam
   #   "something.jpg" if original_filename
   # end
 end

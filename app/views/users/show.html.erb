@@ -1,13 +1,37 @@
-<div id="cover-photo">
-    <%= image_tag @user.profile.cover_photo.url.to_s if @user.profile.cover_photo? %>
+<% if current_user == @user %>
+<a href="#" data-toggle="modal" data-target="#commentLikesModal">
+<% end %>
+<figure id="cover-photo" style="background-image: url('<%= @user.profile.cover_photo.url %>');">
+    <%#= image_tag @user.profile.cover_photo.thumb.url if @user.profile.cover_photo? %>
+    <figcaption class="container">
+    <h2>Change Photo</h2>
+  </figcaption>
+</figure>
+</a>
 
-  <%=form_for :profile, url: user_update_cover_photo_path(params[:id]), method: :patch  do |f| %>
-    <%= f.hidden_field 'id', value: params[:id] %>
-    <%= f.file_field :cover_photo, id: 'choose_pic' %>
-    <%= f.submit "Update cover photo", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
-  <% end %>
-        
+<div class="modal fade" id="commentLikesModal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bannerformmodalTitle">Select Cover Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%=form_for :profile, url: user_update_cover_photo_path(params[:id]), method: :patch  do |f| %>
+          <%= f.hidden_field 'id', value: params[:id] %>
+          <%= f.file_field :cover_photo, id: 'choose_pic' %>
+          <%= f.submit "Update cover photo", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div> 
 </div>
+
 <h1><%= @user.profile.first_name %> <%= @user.profile.last_name %></h1>
 
 <div class="row">
