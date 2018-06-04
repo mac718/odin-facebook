@@ -28,6 +28,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find_by(user_id: params[:profile][:id])
 
     if @profile.update_attribute(:avatar, params[:profile][:avatar])
+      byebug
       redirect_to user_path(params[:profile][:id])
     end
 

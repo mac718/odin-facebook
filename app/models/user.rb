@@ -50,7 +50,7 @@ class User < ApplicationRecord
     full_name = auth.info.name.split
     byebug
     profile = user.build_profile(first_name: full_name[0], last_name: full_name[1], pic: auth.info.image)
-    profile.save
+    profile.save!
     user
   end
 
