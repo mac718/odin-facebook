@@ -36,7 +36,7 @@
               <%= comment.content %>
             </div>
             <div class="comment-likes-timestamp">
-              <%= render 'shared/likeable_likers', locals: {object: comment, likers_names: comment.comment_likers_names, likers: comment.comment_likers, like_path: user_post_comment_likes_path(current_user, post.id, comment.id)} %>
+              <%= render 'shared/likeable_likers', locals: {object: comment, likers_names: comment.comment_likers_names, likers: comment.comment_likers.includes(:profile), like_path: user_post_comment_likes_path(current_user, post.id, comment.id)} %>
               
               <small><em><%= time_ago_in_words(comment.created_at) %> ago.</em></small>
             </div>
