@@ -5,7 +5,7 @@ module ApplicationHelper
     elsif params[:user_id]
       User.find(params[:user_id])
     else
-      current_user.includes(:profile)
+      current_user
     end
   end
 

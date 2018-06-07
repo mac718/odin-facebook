@@ -13,6 +13,7 @@
   <div id="profile-pic">
     <a href="#" data-toggle="modal" data-target="#changeProfilePicModal">
       <%= image_tag @user.profile.avatar.thumb.url if @user.profile.avatar? %>
+      <%= image_tag @user.profile.pic if @user.profile.pic? %>
     </a>
     <p id="name"><%= @user.profile.first_name %> <%= @user.profile.last_name %></p>
   </div>
@@ -64,20 +65,20 @@
   </div> 
 </div>
 
-<h1><%= @user.profile.first_name %> <%= @user.profile.last_name %></h1>
+<h1><%#= @user.profile.first_name %> <%#= @user.profile.last_name %></h1>
 
 <div class="row">
   <div class="col col-md-3">
-    <%= image_tag @user.profile.avatar.thumb.url if @user.profile.avatar? %>
-    <%= image_tag @user.profile.pic if @user.profile.pic? %>
+    <%#= image_tag @user.profile.avatar.thumb.url if @user.profile.avatar? %>
+    <%#= image_tag @user.profile.pic if @user.profile.pic? %>
 
-    <% if current_user == @user %>
-      <%=form_for :profile, url: user_update_avatar_path(params[:id]), method: :patch  do |f| %>
-        <%= f.hidden_field 'id', value: params[:id] %>
-        <%= f.file_field :avatar, id: 'choose_pic' %>
-        <%= f.submit "Update Profile Pic", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
-      <% end %>
-    <% end %>
+    <%# if current_user == @user %>
+      <%#=form_for :profile, url: user_update_avatar_path(params[:id]), method: :patch  do |f| %>
+        <%#= f.hidden_field 'id', value: params[:id] %>
+        <%#= f.file_field :avatar, id: 'choose_pic' %>
+        <%#= f.submit "Update Profile Pic", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
+      <%# end %>
+    <%# end %>
     <% unless @user == current_user %>
       <p><%= link_to "Add friend", friend_requests_path(friend_id: @user), method: :post %></p>
     <% end %>
@@ -101,6 +102,11 @@
     </ul>
     <%= link_to 'Edit Profile', edit_user_profile_path(current_user) if @user == current_user %>
   </div>
+  <div>
+  <% (friends(@user)).each do |friend| %>
+    <%= image_tag friend.profile.avatar.feed.url if friend.profile.avatar? %> 
+  <% end %>
+</div>
 </div>
   <div class="col-md-9">
     <%= render 'shared/feed' %>

@@ -1,9 +1,12 @@
 class User < ApplicationRecord
+  after_create :user_mailer
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
+
+  #validates :password_confirmation, presence: true, on: :create
   has_one :profile
   has_many :posts
   has_many :friendships, dependent: :destroy
@@ -61,4 +64,9 @@ class User < ApplicationRecord
       end
     end
   end
+
+  private 
+    def user_mailer
+      UserMailer.welcome(self).deliver_now
+    end
 end

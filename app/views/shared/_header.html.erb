@@ -11,7 +11,7 @@
         <%= link_to "#{current_user.profile.first_name}", user_path(current_user), class: 'header_link' %>
       </li>
       <li class="nav-item"><%= link_to "Home", user_home_path(current_user), class: 'header_link' %></li>
-      <li class="nav-item">Find Friends</li>
+      <li class="nav-item"><%= link_to "Find Friends", users_path, class: 'header_link' %></li>
       <li class="nav-item">
         <%= link_to 'Sign Out', destroy_user_session_path, id: 'sign_out', method: :delete, class: 'header_link' %>
       </li>
