@@ -26,8 +26,8 @@
         <%= render 'shared/likeable_likers', locals: {object: post, likers_names: post.post_likers_names, likers: post.post_likers, like_path: user_post_likes_path(current_user, post.id)} %>
         <hr>
 
-        <% unless post.comments.empty? %>
-          <% post.comments.each do |comment| %>
+        <% unless post.comments.empty? %> <!--remove-->
+          <% post.comments.includes(:likes).each do |comment| %>
             <div class="post-comment">
               <%= link_to user_path(User.find(comment.user_id)) do %>
                 <%= User.find(comment.user_id).profile.first_name %> 
