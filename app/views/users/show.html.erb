@@ -103,9 +103,10 @@
     <%= link_to 'Edit Profile', edit_user_profile_path(current_user) if @user == current_user %>
   </div>
   <div>
-  <% (friends(@user)).each do |friend| %>
-    <%= image_tag friend.profile.avatar.feed.url if friend.profile.avatar? %> 
-  <% end %>
+    <h5>Friends (<%= friends(@user).count %>)</h5>
+    <% (friends(@user)).each do |friend| %>
+      <%= image_tag friend.profile.avatar.feed.url if friend.profile.avatar? %> 
+    <% end %>
 </div>
 </div>
   <div class="col-md-9">
