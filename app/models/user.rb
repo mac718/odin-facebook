@@ -39,6 +39,7 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
+    #facebook_user = nil?k
     user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
@@ -48,12 +49,15 @@ class User < ApplicationRecord
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
-      
+      #facebook_user = user?
     end
-    full_name = auth.info.name.split
-    byebug
-    profile = user.build_profile(first_name: full_name[0], last_name: full_name[1], pic: auth.info.image)
-    profile.save!
+    unless user.profile
+      full_name = auth.info.name.split
+      profile = user.build_profile(first_name: full_name[0], last_name: full_name[1])
+      user.profile.avatar = AvatarUploader.new
+      user.profile.avatar.download! auth.info.image.gsub('http://','https://')
+      profile.save!
+    end
     user
   end
 
