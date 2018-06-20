@@ -1,6 +1,4 @@
 class Comment < ApplicationRecord
-  attr_readonly :likes_count
-
   belongs_to :commentable, :polymorphic => true
   has_many :likes, :as => :likeable
 

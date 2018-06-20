@@ -15,7 +15,6 @@
       <%= image_tag @user.profile.avatar.thumb.url if @user.profile.avatar? %>
       <%= image_tag @user.profile.pic if @user.profile.pic? %>
     </a>
-    <p id="name"><%= @user.profile.first_name %> <%= @user.profile.last_name %></p>
   </div>
 </div>
 
@@ -105,13 +104,47 @@
   <div>
     <h5>Friends (<%= friends(@user).count %>)</h5>
     <% (friends(@user)).each do |friend| %>
-      <%= image_tag friend.profile.avatar.feed.url if friend.profile.avatar? %> 
+      <%=link_to user_path(friend) do %>
+        <%= image_tag friend.profile.avatar.feed.url if friend.profile.avatar? %>
+      <% end %> 
     <% end %>
-</div>
+  </div>
+  <div>
+    <h5>Photos (<%= @user.photos.count %>)</h5>
+    <% @user.photos.each do |photo| %>
+      <%= image_tag photo.image.gallery.url %> 
+    <% end %>
+    <div>
+      <a href="#" data-toggle="modal" data-target="#uploadImageModal">
+        Add Photo
+      </a>
+    </div>
+    <div class="modal fade" id="uploadImageModal" tabindex="-1" role="dialog" aria-labelledby="uploadImageTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="uploadImageTitle">Select Profile Photo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%=form_for :photo, url: user_photos_path(params[:id]), method: :post  do |f| %>
+              <%= f.hidden_field 'user_id', value: params[:id] %>
+              <%= f.file_field :image, id: 'choose_pic' %>
+              <%= f.submit "Update profile pic", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div> 
+    </div>
+    
+  </div>
 </div>
   <div class="col-md-9">
     <%= render 'shared/feed' %>
   </div>
 </div>
-<!--, 
--->

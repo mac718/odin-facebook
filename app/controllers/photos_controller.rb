@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
+    byebug
 
     if @photo.save!
       flash[:success] = "Photo uploaded!"
@@ -13,6 +14,6 @@ class PhotosController < ApplicationController
 
   private 
     def photo_params
-      params.require(:photo).permit(:user_id, :file)
+      params.require(:photo).permit(:user_id, :image)
     end
 end

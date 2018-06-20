@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :inverse_pending_friends, :through => :inverse_friend_requests, :source => 'user'
   has_many :likes, foreign_key: 'liker_id'
   has_many :comments, :as => :commentable, :foreign_key => 'user_id'
-
+  has_many :photos
   
   def all_friends
     self.friends + self.inverse_friends

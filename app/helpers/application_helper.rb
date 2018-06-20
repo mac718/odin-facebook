@@ -10,6 +10,6 @@ module ApplicationHelper
   end
 
   def friends(user)
-    user.friends + user.inverse_friends
+    user.friends.includes(:profile) + user.inverse_friends.includes(:profile)
   end
 end
