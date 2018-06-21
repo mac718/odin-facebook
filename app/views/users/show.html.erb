@@ -15,6 +15,7 @@
       <%= image_tag @user.profile.avatar.thumb.url if @user.profile.avatar? %>
       <%= image_tag @user.profile.pic if @user.profile.pic? %>
     </a>
+    <p id="name"><%= @user.profile.first_name %> <%= @user.profile.last_name %></p>
   </div>
 </div>
 
