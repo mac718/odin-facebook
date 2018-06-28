@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   :registrations => "users/registrations" }
   resources :users do 
     resources :profiles
-    resources :photos, :defaults => { :likeable => 'Photo' }
+    resources :photos do
+      resources :likes, only: [:create, :destroy], :defaults => { :likeable => 'Photo' }
+    end
     resources :posts do 
       resources :likes, only: [:create, :destroy], :defaults => { :likeable => 'Post' }
       resources :comments, :defaults => { :commentable => 'Post' } do 
