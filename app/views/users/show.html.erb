@@ -74,33 +74,11 @@
 
 <div class="row">
   <div class="col col-md-3">
-    <%#= image_tag @user.profile.avatar.thumb.url if @user.profile.avatar? %>
-    <%#= image_tag @user.profile.pic if @user.profile.pic? %>
-
-    <%# if current_user == @user %>
-      <%#=form_for :profile, url: user_update_avatar_path(params[:id]), method: :patch  do |f| %>
-        <%#= f.hidden_field 'id', value: params[:id] %>
-        <%#= f.file_field :avatar, id: 'choose_pic' %>
-        <%#= f.submit "Update Profile Pic", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
-      <%# end %>
-    <%# end %>
     <% unless @user == current_user %>
       <p><%= link_to "Add friend", friend_requests_path(friend_id: @user), method: :post %></p>
     <% end %>
     <div id="profile-info">
     <ul>
-      <li class="list-item">
-        <div class="dropdown">
-          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            friends (<%= friends(@user).count %>)  
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <% (friends(@user)).each do |friend| %>
-              <%= link_to "#{friend.profile.first_name} #{friend.profile.last_name}", user_path(friend), class: 'dropdown-item' %>
-            <% end %>
-          </div>
-        </div>
-      </li>
       <li class="list-item"><strong>Email:</strong> <%= @user.email %></li>
       <li class="list-item"><strong>Birthday:</strong> <%= @user.profile.birthday %></li>
       <li class="list-item"><strong>Gender:</strong> <%= @user.profile.gender %></li>   
