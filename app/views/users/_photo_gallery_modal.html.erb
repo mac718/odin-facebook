@@ -1,0 +1,24 @@
+<div class="modal fade" id="viewImageModal<%= locals[:index] %>" tabindex="-1" role="dialog" aria-labelledby="viewImageTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewImageTitle">Select Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body row">
+        <div class="col col-md-6">
+          <%= image_tag locals[:photo].image.thumb.url %> 
+        </div>
+        <div class="col col-md-6">
+          <%#= link_to 'like', user_photo_likes_path(@user, photo.id) %>
+          <%= render 'shared/likeable_likers', locals: {object: locals[:photo], likers_names: locals[:photo].photo_likers_names, likers: locals[:photo].photo_likers, like_path: user_photo_likes_path(current_user, locals[:photo].id)} %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div> 
+</div>

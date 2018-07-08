@@ -22,7 +22,7 @@
 
 <!--cover photo upload-->
 
-<%= render 'modal', locals: { id: 'changeCoverModal',
+<%= render 'image_upload_modal', locals: { id: 'changeCoverModal',
                               model: :profile, 
                               path: user_update_cover_photo_path(params[:id]),
                               photo_type: :cover_photo,
@@ -31,7 +31,7 @@
 
 <!--profile photo upload-->
 
-<%= render 'modal', locals: { id: 'changeProfilePicModal', 
+<%= render 'image_upload_modal', locals: { id: 'changeProfilePicModal', 
                               model: :profile, 
                               path: user_update_avatar_path(params[:id]),
                               photo_type: :avatar,
@@ -71,47 +71,21 @@
       <a href="#" data-toggle="modal" data-target="#viewImageModal<%= index %>">
         <%= image_tag photo.image.gallery.url %> 
       </a>
-      <div class="modal fade" id="viewImageModal<%= index %>" tabindex="-1" role="dialog" aria-labelledby="viewImageTitle" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="viewImageTitle">Select Photo</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body row">
-            <div class="col col-md-6">
-              <%= image_tag photo.image.thumb.url %> 
-            </div>
-            <div class="col col-md-6">
-              <%#= link_to 'like', user_photo_likes_path(@user, photo.id) %>
-              <%= render 'shared/likeable_likers', locals: {object: photo, likers_names: photo.photo_likers_names, likers: photo.photo_likers, like_path: user_photo_likes_path(current_user, photo.id)} %>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div> 
-    </div>
+      
+      <%= render 'photo_gallery_modal', locals: { index: index, photo: photo } %>
+      
     <% end %>
     <div>
       <a href="#" data-toggle="modal" data-target="#uploadImageModal">
         Add Photo
       </a>
     </div>
-    <%= render 'modal', locals: { id: 'uploadImageModal', 
+    <%= render 'image_upload_modal', locals: { id: 'uploadImageModal', 
                                   model: :photo, 
                                   path: user_photos_path(params[:id]),
                                   photo_type: :image,
                                   hidden_field: 'user_id',
                                   method: :post } %>
-
-
-
-    
-    
   </div>
 </div>
   <div class="col-md-9">
