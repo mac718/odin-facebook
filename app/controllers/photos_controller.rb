@@ -1,7 +1,6 @@
 class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
-    byebug
 
     if @photo.save!
       flash[:success] = "Photo uploaded!"
@@ -10,6 +9,11 @@ class PhotosController < ApplicationController
       flash[:danger] = "Oh no, your photo could not be saved!"
       redirect_to user_path(current_user)
     end
+  end
+
+  def index
+    @user = User.find(params[:user_id])
+    @photos = @user.photos.includes(:likes)
   end
 
   private 

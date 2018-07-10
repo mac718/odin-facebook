@@ -1,0 +1,11 @@
+<div id="photo-gallery">
+  <h1><%= @user.profile.first_name %> <%= @user.profile.last_name %>'s Photos</h1>
+  <% @user.photos.includes(:likes).each_with_index do |photo, index| %>
+    <a href="#" data-toggle="modal" data-target="#viewImageModal<%= index %>">
+      <%= image_tag photo.image.thumb.url %> 
+    </a>
+    
+    <%= render 'users/photo_gallery_modal', locals: { index: index, photo: photo } %>
+
+  <% end %>
+</div>

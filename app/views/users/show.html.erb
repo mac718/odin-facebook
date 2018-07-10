@@ -67,14 +67,15 @@
 
   <div>
     <h5>Photos (<%= @user.photos.count %>)</h5>
-    <% @user.photos.includes(:likes).each_with_index do |photo, index| %>
+    <% @user.photos.includes(:likes)[0..3].each_with_index do |photo, index| %>
       <a href="#" data-toggle="modal" data-target="#viewImageModal<%= index %>">
         <%= image_tag photo.image.gallery.url %> 
       </a>
       
       <%= render 'photo_gallery_modal', locals: { index: index, photo: photo } %>
-      
+
     <% end %>
+    <%= link_to 'See all photos', user_photos_path(@user) %>
     <div>
       <a href="#" data-toggle="modal" data-target="#uploadImageModal">
         Add Photo
