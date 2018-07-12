@@ -1,0 +1,30 @@
+<div class="modal fade" id="<%= locals[:id] %>LikesModal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bannerformmodalTitle"><%= pluralize((locals[:object].likes.count), 'likes') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          <% locals[:likers].each do |liker| %>
+            <li class="list-group-item">
+              <%= link_to user_path(liker) do %>
+                <%= image_tag liker.profile.avatar.feed.url %>
+              <% end %>
+              <%= link_to "#{liker.profile.first_name} #{liker.profile.last_name}", user_path(liker) %>
+              <button class="btn btn-sm add-friend-modal">
+                <%= link_to "Add friend", friend_requests_path(friend_id: liker),method: :post %>
+              </button>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div> 
+</div>

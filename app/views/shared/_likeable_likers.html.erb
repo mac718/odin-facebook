@@ -40,100 +40,12 @@
     <!-- Modals -->
 
     <% if locals[:object].class == Post %>
-       <div class="modal fade" id="postLikesModal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="bannerformmodalTitle"><%= pluralize((locals[:object].likes.count), 'likes') %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <ul class="list-group">
-                <% locals[:likers].each do |liker| %>
-                  <li class="list-group-item">
-                    <%= link_to user_path(liker) do %>
-                      <%= image_tag liker.profile.avatar.feed.url %>
-                    <% end %>
-                    <%= link_to "#{liker.profile.first_name} #{liker.profile.last_name}", user_path(liker) %>
-                    <button class="btn btn-sm add-friend-modal">
-                      <%= link_to "Add friend", friend_requests_path(friend_id: liker),method: :post %>
-                    </button>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div> 
-      </div>
-
+       <%= render 'shared/likers_modal', locals: { id: 'post', object: locals[:object], likers: locals[:likers] } %>
     <% elsif locals[:object].class == Comment%>
-      <div class="modal fade" id="commentLikesModal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="bannerformmodalTitle"><%= pluralize((locals[:object].likes.count), 'likes') %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <ul class="list-group">
-                <% locals[:likers].each do |liker| %>
-                  <li class="list-group-item">
-                    <%= link_to user_path(liker) do %>
-                      <%= image_tag liker.profile.avatar.feed.url %>
-                    <% end %>
-                    <%= link_to "#{liker.profile.first_name} #{liker.profile.last_name}", user_path(liker) %>
-                    <button class="btn btn-sm add-friend-modal">
-                      <%= link_to "Add friend", friend_requests_path(friend_id: liker),method: :post %>
-                    </button>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% elsif locals[:object].class == Photo %>
-          <div class="modal fade" id="photoLikesModal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodalTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="bannerformmodalTitle"><%= pluralize((locals[:object].likes.count), 'likes') %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <ul class="list-group">
-                <% locals[:likers].each do |liker| %>
-                  <li class="list-group-item">
-                    <%= link_to user_path(liker) do %>
-                      <%= image_tag liker.profile.avatar.feed.url %>
-                    <% end %>
-                    <%= link_to "#{liker.profile.first_name} #{liker.profile.last_name}", user_path(liker) %>
-                    <button class="btn btn-sm add-friend-modal">
-                      <%= link_to "Add friend", friend_requests_path(friend_id: liker),method: :post %>
-                    </button>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div> 
-      </div>
-     <% end %>
+       <%= render 'shared/likers_modal', locals: { id: 'comment', object: locals[:object], likers: locals[:likers] } %>
+    <% elsif locals[:object].class == Photo %>
+       <%= render 'shared/likers_modal', locals: { id: 'photo', object: locals[:object], likers: locals[:likers] } %>
+    <% end %>
 
   <% else %>
     <%= link_to 'like', locals[:like_path], method: :post %>
