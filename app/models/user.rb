@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   def feed
     ids = (self.friends.pluck(:id) + self.inverse_friends.pluck(:id)) << self.id
-    posts = Post.where(user_id: ids)
+    posts = Post.where(user_id: ids).includes(:user, :likes, :comments)
   end
 
   def self.from_omniauth(auth)
