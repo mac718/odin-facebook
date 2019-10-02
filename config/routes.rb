@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "users#home"
   devise_for :users, :path => 'accounts', :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", 
   :registrations => "users/registrations" }
-  resources :users do 
+  resources :users, only: [:home, :index, :show, :edit, :update] do 
     resources :profiles
     resources :photos do
       resources :likes, only: [:create, :destroy], :defaults => { :likeable => 'Photo' }
