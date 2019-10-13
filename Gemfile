@@ -67,4 +67,5 @@ gem "font-awesome-rails"
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'will_paginate', '~> 3.1.0'
+gem 'seed_dump'
 #gem 'thin'
