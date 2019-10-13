@@ -22,6 +22,7 @@ class ProfilesController < ApplicationController
   def update
     @profile = Profile.find(params[:id])
     @profile.update(profile_params)
+    redirect_to user_path(params[:profile][:id])
   end
 
   def update_avatar
