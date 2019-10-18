@@ -7,12 +7,13 @@ class FriendRequestsController < ApplicationController
   end
 
   def create
+    puts 'hello'
     friend = User.find(params[:friend_id])
     @friend_request = current_user.friend_requests.new(friend: friend)
 
     if @friend_request.save
       #render :show, status: :created, location: @friend_request
-      redirect_back fallback_location: 'users/home'
+      #redirect_back fallback_location: 'users/home'
     else
       render json: @friend_request.errors, status: :unprocessable_entity
     end

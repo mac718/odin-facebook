@@ -10,8 +10,9 @@
     <button class="btn btn-secondary index-button"><%= fa_icon "check" %> Friends</button>
     
   <% else %>
-    <%= link_to friend_requests_path(friend_id: user), method: :post do %>
-      <button class="btn btn-primary index-button">Add Friend</button>
-    <% end %>
+    <%= form_for :friend_requests, url: friend_requests_path(friend_id: user) do |f|%>
+      <%= f.submit 'Add Friend', class:"btn btn-primary index-button" %>
+      <% end %>
   <% end %>
 </li>
+
