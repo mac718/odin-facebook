@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   after_create :user_mailer
+  scope :all_except, ->(user) { where.not(id: user) }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

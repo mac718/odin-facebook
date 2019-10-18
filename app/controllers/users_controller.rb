@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.includes(:profile) 
+    @users = User.all_except(current_user).includes(:profile) 
   end
 
   def show
