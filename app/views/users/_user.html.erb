@@ -10,6 +10,13 @@
       <button class="btn btn-secondary index-button">Unfriend</button>
     <% end %>
     <button class="btn btn-secondary index-button"><%= fa_icon "check" %>Friends</button>
+  <% elsif user.friend_requests.pluck(:friend_id).include?(current_user.id) %>
+    <%= form_for :friend_requests, url: friend_request_path(FriendRequest.where('user_id = ? AND friend_id = ?', user.id, current_user.id)[0].id), method: :put do |f| %>
+      <%= f.submit 'Accept Friend Request', class:"btn btn-secondary index-button" %>
+    <% end %>
+    <%= form_for :friend_requests, url: friend_request_path(FriendRequest.where('user_id = ? AND friend_id = ?', user.id, current_user.id)[0].id), method: :delete do |f| %>
+      <%= f.submit 'Decline', class:"btn btn-secondary index-button" %>
+    <% end %>
   <% elsif current_user.friend_requests.pluck(:friend_id).include?(user.id) %>
       <button class="btn btn-secondary index-button" disabled>Pending</button>
   <% else %>
@@ -18,4 +25,3 @@
     <% end %>
   <% end %>
 </li>
-
