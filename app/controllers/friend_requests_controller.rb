@@ -13,7 +13,7 @@ class FriendRequestsController < ApplicationController
 
     if @friend_request.save
       #render :show, status: :created, location: @friend_request
-      #redirect_back fallback_location: 'users/home'
+      redirect_back fallback_location: 'users/home'
     else
       render json: @friend_request.errors, status: :unprocessable_entity
     end
