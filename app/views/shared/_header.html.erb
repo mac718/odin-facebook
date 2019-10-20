@@ -4,40 +4,40 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collpase navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <% if current_user && current_user.profile %>
         
-      <li class="nav-item">
-        <%= link_to "#{current_user.profile.first_name}", user_path(current_user), class: 'header_link' %>
-      </li>
-      <li class="nav-item"><%= link_to "Home", user_home_path(current_user), class: 'header_link' %></li>
-      <li class="nav-item"><%= link_to "Find Friends", users_path, class: 'header_link' %></li>
-      <li class="nav-item">
-        <%= link_to 'Sign Out', destroy_user_session_path, id: 'sign_out', method: :delete, class: 'header_link' %>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Friend Requests(<%= current_user.inverse_pending_friends.count %>)
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <% current_user.inverse_pending_friends.includes(:profile).each do |pending_friend| %>
-            <a class="dropdown-item" href="#">
-              <%= image_tag pending_friend.profile.avatar.feed.url if pending_friend.profile.avatar? %>
-              <%= pending_friend.profile.first_name %>
-              <%= pending_friend.profile.last_name %>
-              
-              <%= form_for :friend_requests, url: friend_request_path(FriendRequest.where('user_id = ? AND friend_id = ?', pending_friend.id, current_user.id)[0].id), method: :delete do |f| %>
-                <%= f.submit 'decline', class:"btn btn-danger index-button" %>
-              <% end %>
-              
-              <%= form_for :friend_requests, url: friend_request_path(FriendRequest.where('user_id = ? AND friend_id = ?', pending_friend.id, current_user.id)[0].id), method: :put do |f| %>
-                <%= f.submit 'accept', class:"btn btn-success index-button" %>
-              <% end %>
-            </a>
-          <% end %>
-        </div>
-      </li>
-  <% end %>
-  </ul>
-</div>
+        <li class="nav-item">
+          <%= link_to "#{current_user.profile.first_name}", user_path(current_user), class: 'header_link' %>
+        </li>
+        <li class="nav-item"><%= link_to "Home", user_home_path(current_user), class: 'header_link' %></li>
+        <li class="nav-item"><%= link_to "Find Friends", users_path, class: 'header_link' %></li>
+        <li class="nav-item">
+          <%= link_to 'Sign Out', destroy_user_session_path, id: 'sign_out', method: :delete, class: 'header_link' %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Friend Requests(<%= current_user.inverse_pending_friends.count %>)
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <% current_user.inverse_pending_friends.includes(:profile).each do |pending_friend| %>
+              <a class="dropdown-item" href="#">
+                <%= image_tag pending_friend.profile.avatar.feed.url if pending_friend.profile.avatar? %>
+                <%= pending_friend.profile.first_name %>
+                <%= pending_friend.profile.last_name %>
+                
+                <%= form_for :friend_requests, url: friend_request_path(FriendRequest.where('user_id = ? AND friend_id = ?', pending_friend.id, current_user.id)[0].id), method: :delete do |f| %>
+                  <%= f.submit 'decline', class:"btn btn-danger index-button" %>
+                <% end %>
+                
+                <%= form_for :friend_requests, url: friend_request_path(FriendRequest.where('user_id = ? AND friend_id = ?', pending_friend.id, current_user.id)[0].id), method: :put do |f| %>
+                  <%= f.submit 'accept', class:"btn btn-success index-button" %>
+                <% end %>
+              </a>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </nav>
