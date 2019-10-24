@@ -1,5 +1,5 @@
 class Photo < ApplicationRecord
-  belongs_to :user, :foreign_key => 'image_id'
+  belongs_to :user, :foreign_key => 'image_id', optional: true
   has_many :likes, :as => :likeable
 
   mount_uploader :image, ImageUploader

@@ -2,6 +2,8 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
 
+    puts(photo_params)
+
     if @photo.save!
       flash[:success] = "Photo uploaded!"
       redirect_to user_path(current_user)
