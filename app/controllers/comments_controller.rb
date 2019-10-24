@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     
     @comment = @post.comments.build(comment_params)
-    byebug
     if @comment.save!
       redirect_to :back
     else
@@ -17,5 +16,3 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:user_id, :content, :commentable_type)
     end
 end
-
-#commenter_id: params[:user_id], content: params[:comment][:content], commentable_type: params[:commentable]
