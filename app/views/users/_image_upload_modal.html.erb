@@ -11,7 +11,7 @@
         <%=form_for locals[:model], url: locals[:path], method: locals[:method]  do |f| %>
           <%= f.hidden_field locals[:hidden_field], value: params[:id] %>
           <%= f.file_field locals[:photo_type], id: 'choose_pic' %>
-          <%= f.submit "Update #{locals[:photo_type].to_s.gsub('_', ' ').capitalize}", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
+          <%= f.submit "Upload #{locals[:photo_type].to_s.gsub('_', ' ').capitalize}", id: 'update-profile-pic-btn', class: 'btn btn-primary btn-sm' %>
         <% end %>
       </div>
       <div class="modal-footer">

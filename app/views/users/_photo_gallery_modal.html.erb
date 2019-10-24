@@ -12,7 +12,6 @@
           <%= image_tag locals[:photo].image.thumb.url %> 
         </div>
         <div class="col col-md-6">
-          <%#= link_to 'like', user_photo_likes_path(@user, photo.id) %>
           <%= render 'shared/likeable_likers', locals: {object: locals[:photo], likers_names: locals[:photo].photo_likers_names, likers: locals[:photo].photo_likers, like_path: user_photo_likes_path(current_user, locals[:photo].id)} %>
         </div>
       </div>
