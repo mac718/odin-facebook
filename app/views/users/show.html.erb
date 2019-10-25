@@ -75,12 +75,14 @@
       <%= render 'photo_gallery_modal', locals: { index: index, photo: photo } %>
 
     <% end %>
-    <%= link_to 'See all photos', user_photos_path(@user) %>
+    <%= link_to 'See all photos', user_photos_path(@user), class: 'see-all-photos' %>
+    <% if @user == current_user %>
     <div>
       <a href="#" data-toggle="modal" data-target="#uploadImageModal">
         Add Photo
       </a>
     </div>
+    <% end %>
     <%= render 'image_upload_modal', locals: { id: 'uploadImageModal', 
                                   model: :photo, 
                                   path: user_photos_path(params[:id]),
