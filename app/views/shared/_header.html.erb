@@ -19,7 +19,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Friend Requests(<%= current_user.inverse_pending_friends.count %>)
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <% current_user.inverse_pending_friends.includes(:profile).each do |pending_friend| %>
               <a class="dropdown-item" href="#">
                 <%= image_tag pending_friend.profile.avatar.feed.url if pending_friend.profile.avatar? %>
