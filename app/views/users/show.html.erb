@@ -53,7 +53,7 @@
       <!--<p><%#= link_to "Add friend", friend_requests_path(friend_id: @user), method: :post %></p>-->
     <% elsif current_user.friend_requests.pluck(:friend_id).include?(@user.id) %>
        <button class="btn btn-secondary index-button" disabled>Pending</button>
-    <% else %>
+    <% elsif current_user.all_friends.include?(@user) %>
       <button class="btn btn-success index-button" disabled><%= fa_icon "check" %>Friends</button>
       <%= link_to friend_path(@user.id), method: :delete do %>
         <button class="btn btn-danger index-button">Unfriend</button>

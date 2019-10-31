@@ -16,8 +16,8 @@
           <%= link_to 'Sign Out', destroy_user_session_path, id: 'sign_out', method: :delete, class: 'header_link' %>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Friend Requests(<%= current_user.inverse_pending_friends.count %>)
+          <a id='friend-requests' class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Friend Requests <span class="badge-pill badge-light"><%= current_user.inverse_pending_friends.count %></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <% current_user.inverse_pending_friends.includes(:profile).each do |pending_friend| %>
