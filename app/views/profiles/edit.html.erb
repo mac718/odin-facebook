@@ -1,5 +1,5 @@
 <div id="profile-form">
-  <%= form_for @profile, url: user_profile_path(params[:id]) do |f| %>
+    <%= form_for @profile, url: user_profile_path(params[:id]) do |f| %>
     <%= f.hidden_field 'user_id', value: params[:user_id] %>
     <%= f.hidden_field 'id', value: params[:id] %>
 
@@ -16,8 +16,10 @@
     <%= f.label :gender %>
     <%= f.text_field :gender, class: 'form-control' %>
 
-    <%= f.file_field :avatar, accept: 'image/jpeg,image/gif,image/png,image/tiff' %>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar, accept: 'image/jpeg,image/gif,image/png,image/tiff', class: 'form-control' %>
 
-    <%= f.submit 'Save Profile' %>
-  <% end %>
+    <%= f.submit 'Save Profile', class: 'form-control btn btn-primary' %>
+
+    <% end %>
 </div>
