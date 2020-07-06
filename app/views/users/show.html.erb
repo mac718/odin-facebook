@@ -65,7 +65,7 @@
       <li class="list-item"><strong>Birthday:</strong> <%= @user.profile.birthday %></li>
       <li class="list-item"><strong>Gender:</strong> <%= @user.profile.gender %></li>   
     </ul>
-    <%= link_to 'Edit Profile', edit_user_profile_path(current_user) if @user == current_user %>
+    <%= link_to 'Edit Profile', edit_user_profile_path(current_user, current_user.profile.id) if @user == current_user %>
   </div>
   <div>
     <h5>Friends (<%= friends(@user).count %>)</h5>
